@@ -11,5 +11,6 @@
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>
         <class>com.moeller.business.domain.Permission</class>
+        <class>com.moeller.business.domain.Provider</class>
     </persistence-unit>
 </persistence>
