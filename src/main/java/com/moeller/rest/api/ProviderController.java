@@ -2,6 +2,7 @@ package com.moeller.rest.api;
 
 import com.moeller.business.dao.ProviderRepository;
 import com.moeller.business.domain.Provider;
+import com.moeller.business.service.ProviderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +22,9 @@ public class ProviderController {
     @Inject
     private ProviderRepository providerRepository;
 
+    @Inject
+    private ProviderService providerService;
+
     @GET
     @Path("/{providerid}")
     @Produces({ "application/xml",
@@ -33,7 +37,7 @@ public class ProviderController {
     @Consumes({"application/json", "application/xml"})
     public void addProvider (Provider provider) {
         LOGGER.debug("Add provider " + provider);
-        providerRepository.saveProvider(provider);
+        providerService.saveProvider(provider);
     }
 
 
