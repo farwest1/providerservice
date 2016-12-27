@@ -24,7 +24,8 @@ public class ProviderService {
 
 
     public void saveProvider(Provider provider){
+        jmsMsg.sendMessage(provider);
         providerRepository.saveProvider(provider);
-        jmsMsg.sendMessage("test");
+
     }
 }

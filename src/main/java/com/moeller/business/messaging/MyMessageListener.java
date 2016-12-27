@@ -1,5 +1,6 @@
 package com.moeller.business.messaging;
 
+import com.moeller.business.domain.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,10 @@ import javax.jms.MessageListener;
  */
 @MessageDriven(activationConfig = {
         @ActivationConfigProperty(propertyName = "destinationLookup",propertyValue = "java:jboss/jms/ProviderTopic"),
-        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic")
+        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),
+        @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "Durable"),
+        @ActivationConfigProperty(propertyName = "subscriptionName", propertyValue = "LoopbackSubscriber")
+
 })
 public class MyMessageListener implements MessageListener {
 
@@ -22,8 +26,10 @@ public class MyMessageListener implements MessageListener {
 
     @Override
     public void onMessage(Message message) {
+
         try {
-            LOGGER.info("message received: " + message.getBody(String.class));
+            LOGGER.info("message received: " + (Provider)message.getBody(Provider.class));
+
         }catch(JMSException e){
             e.printStackTrace();
         }
