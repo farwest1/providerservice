@@ -1,6 +1,12 @@
 package com.moeller.business.messaging;
 
 import com.moeller.common.Service;
+import java.util.UUID;
+import javax.jms.JMSConnectionFactory;
+import javax.jms.JMSException;
+import javax.jms.JMSProducer;
+import javax.jms.Message;
+import javax.jms.ObjectMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +31,7 @@ public class JmsMsg {
 //    private static ConnectionFactory connectionFactory;
 
     @Inject
+//      @JMSConnectionFactory("java:/jms/remoteCF")
     private JMSContext context;
 
     @Resource(lookup = "java:jboss/jms/ProviderTopic")
@@ -32,7 +39,11 @@ public class JmsMsg {
 
     public void sendMessage(Serializable msg){
         LOGGER.info("Publish new message");
-        //connectionFactory.createContext().createProducer().send(topic, msg);
-        context.createProducer().send(topic, msg );
+        //connectionFactory.createContext().createProducer().send(topic, msg)
+
+        context.createProducer().setJMSCorrelationID(UUID.randomUUID().toString()).send(topic, msg);
+
+
+
     }
 }

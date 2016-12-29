@@ -28,7 +28,10 @@ public class MyMessageListener implements MessageListener {
     public void onMessage(Message message) {
 
         try {
-            LOGGER.info("message received: " + (Provider)message.getBody(Provider.class));
+            LOGGER.info("message received: ");
+            LOGGER.info("CorrelationId: " + message.getJMSCorrelationID());
+            Provider provider = message.getBody(Provider.class);
+            LOGGER.info("Provider: " + provider);
 
         }catch(JMSException e){
             e.printStackTrace();
