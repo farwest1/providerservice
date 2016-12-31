@@ -14,7 +14,7 @@ import javax.jms.MessageListener;
  * Created by Bernd on 26.12.2016.
  */
 @MessageDriven(activationConfig = {
-        @ActivationConfigProperty(propertyName = "destinationLookup",propertyValue = "java:jboss/jms/ProviderTopic"),
+        @ActivationConfigProperty(propertyName = "destinationLookup",propertyValue = "java:/topic/duke-topic"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),
         @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "Durable"),
         @ActivationConfigProperty(propertyName = "subscriptionName", propertyValue = "LoopbackSubscriber")
