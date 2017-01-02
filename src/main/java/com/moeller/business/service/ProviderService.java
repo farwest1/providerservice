@@ -15,17 +15,21 @@ import javax.transaction.Transactional;
 @Transactional
 public class ProviderService {
 
-    @Inject
     private ProviderRepository providerRepository;
 
-    @Inject
     private JmsMsg jmsMsg;
 
+    protected ProviderService(){}
+
+  @Inject
+  public ProviderService(ProviderRepository providerRepository, JmsMsg jmsMsg) {
+    this.providerRepository = providerRepository;
+    this.jmsMsg = jmsMsg;
+  }
 
 
-    public void saveProvider(Provider provider){
-        jmsMsg.sendMessage(provider);
+  public void saveProvider(Provider provider){
         providerRepository.saveProvider(provider);
-
+        jmsMsg.sendMessage(provider);
     }
 }

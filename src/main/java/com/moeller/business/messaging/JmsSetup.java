@@ -14,11 +14,6 @@ import javax.jms.Topic;
 @JMSDestinationDefinitions(
     value = {
         @JMSDestinationDefinition(
-            name = "java:/queue/duke-queue",
-            interfaceName = "javax.jms.Queue",
-            destinationName = "duke"
-        ),
-        @JMSDestinationDefinition(
             name = "java:/topic/duke-topic",
             interfaceName = "javax.jms.Topic",
             destinationName = "duke-topic"

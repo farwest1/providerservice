@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.UUID;
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
 import javax.jms.Topic;
 import org.slf4j.Logger;
@@ -21,12 +22,19 @@ public class JmsMsg {
 //    @Resource(lookup = "java:comp/DefaultJMSConnectionFactory")
 //    private static ConnectionFactory connectionFactory;
 
-    @Inject
-//      @JMSConnectionFactory("java:/jms/remoteCF")
     private JMSContext context;
 
-    @Inject
     private Topic topic;
+
+    public JmsMsg(){
+
+    }
+
+    @Inject
+    public JmsMsg(@JMSConnectionFactory("java:/artemisCF") JMSContext jmsContext, Topic topic) {
+        this.context = jmsContext;
+        this.topic = topic;
+    }
 
     public void sendMessage(Serializable msg){
         LOGGER.info("Publish new message");
