@@ -31,7 +31,8 @@ public class JmsMsg {
     }
 
     @Inject
-    public JmsMsg(@JMSConnectionFactory("java:/artemisCF") JMSContext jmsContext, Topic topic) {
+    //public JmsMsg(@JMSConnectionFactory("java:/artemisCF") JMSContext jmsContext, Topic topic) {
+    public JmsMsg(@JMSConnectionFactory("java:comp/DefaultJMSConnectionFactory") JMSContext jmsContext, Topic topic) {
         this.context = jmsContext;
         this.topic = topic;
     }

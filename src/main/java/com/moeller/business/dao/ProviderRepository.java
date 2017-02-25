@@ -36,7 +36,7 @@ public class ProviderRepository {
 
     public void saveProvider (Provider provider){
 
-        entityManager.persist(provider);
+        entityManager.merge(provider);
     }
 
 

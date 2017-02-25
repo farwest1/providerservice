@@ -13,15 +13,17 @@ import javax.jms.MessageListener;
 /**
  * Created by Bernd on 26.12.2016.
  */
+
 @MessageDriven(activationConfig = {
         @ActivationConfigProperty(propertyName = "destinationLookup",propertyValue = "java:/topic/duke-topic"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),
         @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "Durable"),
         @ActivationConfigProperty(propertyName = "subscriptionName", propertyValue = "LoopbackSubscriber"),
         @ActivationConfigProperty(propertyName = "clientId", propertyValue = "providersvcmdb"),
-        @ActivationConfigProperty(propertyName = "connectionFactoryLookup", propertyValue = "java:/artemisCF")
+//        @ActivationConfigProperty(propertyName = "connectionFactoryLookup", propertyValue = "java:/artemisCF")
 
 })
+
 public class MyMessageListener implements MessageListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyMessageListener.class);
