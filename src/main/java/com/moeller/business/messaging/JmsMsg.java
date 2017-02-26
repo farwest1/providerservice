@@ -1,5 +1,7 @@
 package com.moeller.business.messaging;
 
+import com.google.gson.Gson;
+import com.moeller.business.domain.Provider;
 import com.moeller.common.Service;
 import java.io.Serializable;
 import java.util.UUID;
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
 public class JmsMsg {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JmsMsg.class);
+    private static final Gson GSON = new Gson();
 
 //    @Resource(lookup = "java:comp/DefaultJMSConnectionFactory")
 //    private static ConnectionFactory connectionFactory;
@@ -37,9 +40,10 @@ public class JmsMsg {
         this.topic = topic;
     }
 
-    public void sendMessage(Serializable msg){
+    public void publishProviderChg(Provider provider){
         LOGGER.info("Publish new message");
         //connectionFactory.createContext().createProducer().send(topic, msg)
+        String msg = GSON.toJson(provider);
 
         context.createProducer().setJMSCorrelationID(UUID.randomUUID().toString()).send(topic, msg);
     }

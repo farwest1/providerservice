@@ -1,5 +1,6 @@
 package com.moeller.business.messaging;
 
+import com.google.gson.Gson;
 import com.moeller.business.domain.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ import javax.jms.MessageListener;
 public class MyMessageListener implements MessageListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyMessageListener.class);
+    private static final Gson GSON = new Gson();
 
     @Override
     public void onMessage(Message message) {
@@ -34,7 +36,8 @@ public class MyMessageListener implements MessageListener {
         try {
             LOGGER.info("message received: ");
             LOGGER.info("CorrelationId: " + message.getJMSCorrelationID());
-            Provider provider = message.getBody(Provider.class);
+            String msg = message.getBody(String.class);
+            Provider provider = GSON.fromJson(msg, Provider.class);
             LOGGER.info("Provider: " + provider);
 
         }catch(JMSException e){

@@ -30,6 +30,6 @@ public class ProviderService {
 
   public void saveProvider(Provider provider){
         providerRepository.saveProvider(provider);
-        jmsMsg.sendMessage(provider);
+        jmsMsg.publishProviderChg(provider);
     }
 }
