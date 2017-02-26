@@ -27,21 +27,21 @@ import javax.jms.MessageListener;
 
 public class MyMessageListener implements MessageListener {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyMessageListener.class);
-    private static final Gson GSON = new Gson();
+  private static final Logger LOGGER = LoggerFactory.getLogger(MyMessageListener.class);
+  private static final Gson GSON = new Gson();
 
-    @Override
-    public void onMessage(Message message) {
+  @Override
+  public void onMessage(Message message) {
 
-        try {
-            LOGGER.info("message received: ");
-            LOGGER.info("CorrelationId: " + message.getJMSCorrelationID());
-            String msg = message.getBody(String.class);
-            Provider provider = GSON.fromJson(msg, Provider.class);
-            LOGGER.info("Provider: " + provider);
+      try {
+          LOGGER.info("message received: ");
+          LOGGER.info("CorrelationId: " + message.getJMSCorrelationID());
+          String msg = message.getBody(String.class);
+          Provider provider = GSON.fromJson(msg, Provider.class);
+          LOGGER.info("Provider: " + provider);
 
-        }catch(JMSException e){
-            e.printStackTrace();
-        }
-    }
-}
+      }catch(JMSException e){
+          e.printStackTrace();
+      }
+  }
+  }
